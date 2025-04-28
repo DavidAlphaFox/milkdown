@@ -83,11 +83,11 @@ export class Timer {
 /// Timer type can be used to create timers in different clocks.
 export class TimerType {
   /// The unique id of the timer type.
-  readonly id: symbol
+  readonly id: symbol //时间类型ID
   /// The name of the timer type.
-  readonly name: string
+  readonly name: string // 时间类型的名称
   /// The timeout of the timer type.
-  readonly timeout: number
+  readonly timeout: number // 超时时间
 
   /// Create a timer type with a name and a timeout.
   /// The name should be unique in the clock.

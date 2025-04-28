@@ -4,7 +4,7 @@ import type { Timer, TimerType } from './timer'
 
 /// @internal
 export type TimerMap = Map<symbol, Timer>
-
+//Clock保存不同的Timer类型的map表
 /// Container is a map of timers.
 export class Clock {
   /// @internal

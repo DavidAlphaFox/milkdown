@@ -180,7 +180,7 @@ export class Editor {
   readonly config = (configure: Config) => {
     this.#configureList.push(configure)
     return this
-  }
+  } //将配置放入配置列表
 
   /// Remove a config for the editor.
   readonly removeConfig = (configure: Config) => {
@@ -197,11 +197,11 @@ export class Editor {
         handler: undefined,
         cleanup: undefined,
       })
-    })
+    }) //把plugins放入PluginStore
 
     if (this.#status === EditorStatus.Created)
       this.#prepare(_plugins, this.#usrPluginStore)
-
+    // 如果当前的状态是已经创建了，则对plugins直接进行准备操作
     return this
   }
 
@@ -227,12 +227,12 @@ export class Editor {
   /// Create the editor with current config and plugins.
   /// If the editor is already created, it will be recreated.
   readonly create = async (): Promise<Editor> => {
-    if (this.#status === EditorStatus.OnCreate) return this
+    if (this.#status === EditorStatus.OnCreate) return this //处在正在创建的状态，直接返回了
 
-    if (this.#status === EditorStatus.Created) await this.destroy()
+    if (this.#status === EditorStatus.Created) await this.destroy() //已经创建了，就需要先将当前的Editor摧毁掉
 
-    this.#setStatus(EditorStatus.OnCreate)
-
+    this.#setStatus(EditorStatus.OnCreate) //更新状态为正在创建，更新状态，触发更新状态回调函数
+    //进行插件初始化
     this.#loadInternal()
     this.#prepare([...this.#usrPluginStore.keys()], this.#usrPluginStore)
 
