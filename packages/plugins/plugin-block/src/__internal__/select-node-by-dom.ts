@@ -17,7 +17,7 @@ export function selectRootNodeByDom(
       top: coords.y,
     })?.inside //返回对应坐标系啊的内容位置
     if (pos == null || pos < 0) return null
-
+    //ResolvedPos是状态模型对特定位置进行决策后获得更多信息
     let $pos = view.state.doc.resolve(pos) //返回所在位置下的文档对象
     let node = view.state.doc.nodeAt(pos)//返回所在位置下的Node实例
     let element = view.nodeDOM(pos) as HTMLElement | null //该位置下的HTMLElement
