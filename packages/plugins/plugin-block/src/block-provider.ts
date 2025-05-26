@@ -105,7 +105,7 @@ export class BlockProvider {
   #init() {
     const view = this.#ctx.get(editorViewCtx)
     const root = this.#root ?? view.dom.parentElement ?? document.body
-    root.appendChild(this.#element)
+    root.appendChild(this.#element) // 在视图的跟节点处插入handler视图的根节点
 
     const service = this.#ctx.get(blockServiceInstance.key)
     service.bind(this.#ctx, (message) => {
