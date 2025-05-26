@@ -68,7 +68,7 @@ export class BlockService {
 
   /// @internal
   #dragging = false
-
+  // 从config中找到对应的配置，是否有节点过滤器
   /// @internal
   get #filterNodes(): FilterNodes | undefined {
     return this.#ctx?.get(blockConfig.key).filterNodes
