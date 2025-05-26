@@ -39,7 +39,7 @@ export type BlockServiceMessage = (message: BlockServiceMessageType) => void
 export class BlockService {
   /// @internal
   #ctx?: Ctx
-
+  //鼠标点击后，创建选中区域
   /// @internal
   #createSelection: () => null | Selection = () => {
     if (!this.#active) return null
@@ -50,8 +50,8 @@ export class BlockService {
       const nodeSelection = NodeSelection.create(
         view.state.doc,
         result.$pos.pos
-      )
-      view.dispatch(view.state.tr.setSelection(nodeSelection))
+      ) //创建选中区域
+      view.dispatch(view.state.tr.setSelection(nodeSelection)) //对视图的状态进行事务转换
       view.focus()
       this.#activeSelection = nodeSelection
       return nodeSelection
@@ -124,14 +124,14 @@ export class BlockService {
     this.#activeDOMRect = this.#active?.el.getBoundingClientRect()
     this.#createSelection()
   }
-
+  // 对区块的拖拽开始
   /// @internal
   #handleMouseUp = () => {
     if (!this.#dragging) {
       requestAnimationFrame(() => {
         if (!this.#activeDOMRect) return
         this.#view?.focus()
-      })
+      }) //如果不是dragging的状态，需要让视图被选中
 
       return
     }
@@ -141,30 +141,30 @@ export class BlockService {
 
   /// @internal
   #handleDragStart = (event: DragEvent) => {
-    this.#dragging = true
+    this.#dragging = true //设置拖拽的状态
 
-    const view = this.#view
+    const view = this.#view //当前视图
     if (!view) return
-    view.dom.dataset.dragging = 'true'
+    view.dom.dataset.dragging = 'true' //设置视图处在拖拽状态
 
     const selection = this.#activeSelection
     if (event.dataTransfer && selection) {
-      const slice = selection.content()
-      event.dataTransfer.effectAllowed = 'copyMove'
-      const { dom, text } = serializeForClipboard(view, slice)
-      event.dataTransfer.clearData()
+      const slice = selection.content() //获取当前内容
+      event.dataTransfer.effectAllowed = 'copyMove' //设置拖拽事件准许操作
+      const { dom, text } = serializeForClipboard(view, slice)//将拖拽内容序列化到剪切板中
+      event.dataTransfer.clearData() // 清空数据
       event.dataTransfer.setData(
         brokenClipboardAPI ? 'Text' : 'text/html',
         dom.innerHTML
-      )
+      ) // 设置数据类型和数据
       if (!brokenClipboardAPI) event.dataTransfer.setData('text/plain', text)
       const activeEl = this.#active?.el
-      if (activeEl) event.dataTransfer.setDragImage(activeEl, 0, 0)
+      if (activeEl) event.dataTransfer.setDragImage(activeEl, 0, 0) //创建拖拽的镜像
 
       view.dragging = {
         slice,
         move: true,
-      }
+      } //通知编辑器视图，正在拖拽
     }
   }
 
