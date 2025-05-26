@@ -13,7 +13,7 @@ import type { BlockEditFeatureConfig } from '../index'
 import { menuIcon, plusIcon } from '../../../icons'
 import { menuAPI } from '../menu'
 import { BlockHandle } from './component'
-
+//milkdown是使用PlugIn的实现在Block之前添加Handle图标和展开菜单的
 export class BlockHandleView implements PluginView {
   #content: HTMLElement
   #provider: BlockProvider

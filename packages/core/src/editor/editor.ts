@@ -40,7 +40,7 @@ type EditorPluginStore = Map<
     cleanup: ReturnType<CtxRunner>
   }
 >
-
+// Mikdown的Editor
 /// The milkdown editor class.
 export class Editor {
   /// Create a new editor instance.

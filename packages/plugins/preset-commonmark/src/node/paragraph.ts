@@ -14,7 +14,7 @@ withMeta(paragraphAttr, {
   displayName: 'Attr<paragraph>',
   group: 'Paragraph',
 })
-
+// 定义ProseMirror的paragraph，Scheme
 /// Schema for paragraph node.
 export const paragraphSchema = $nodeSchema('paragraph', (ctx) => ({
   content: 'inline*',
