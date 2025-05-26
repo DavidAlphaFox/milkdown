@@ -46,7 +46,7 @@ export interface BlockProviderOptions {
   /// The root element that the block will be appended to.
   root?: HTMLElement
 }
-
+// block渲染提供组件
 /// A provider for creating block.
 export class BlockProvider {
   /// @internal
@@ -143,10 +143,10 @@ export class BlockProvider {
     this.#service?.removeEvent(this.#element)
     this.#element.remove()
   }
-
+  //当确认需要显示对应的视图时，进行显示
   /// Show the block.
   show = (active: ActiveNode) => {
-    const dom = active.el
+    const dom = active.el //活跃节点中的HTMLElement
     const editorDom = this.#ctx.get(editorViewCtx).dom
     const deriveContext: DeriveContext = {
       ctx: this.#ctx,
@@ -168,7 +168,7 @@ export class BlockProvider {
       const offsetExt = offset(offsetOption)
       middleware.push(offsetExt)
     }
-
+    //使用floating ui显示对应的对象
     computePosition(virtualEl, this.#element, {
       placement: this.#getPlacement
         ? this.#getPlacement(deriveContext)

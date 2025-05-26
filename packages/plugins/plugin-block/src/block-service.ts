@@ -176,22 +176,23 @@ export class BlockService {
     view.dom.dataset.dragging = 'false'
     return false
   }
-
+  //当鼠标放到一个block上的时候
   /// @internal
   #mousemoveCallback = throttle((view: EditorView, event: MouseEvent) => {
-    if (!view.editable) return
+    if (!view.editable) return //不在编辑状体立刻结束
 
-    const rect = view.dom.getBoundingClientRect()
-    const x = rect.left + rect.width / 2
+    const rect = view.dom.getBoundingClientRect() //得到该区域的大小
+    const x = rect.left + rect.width / 2 // 计算x轴的中间位置
+    // 得到特定位置的DOM对象
     const dom = view.root.elementFromPoint(x, event.clientY)
-    if (!(dom instanceof Element)) {
-      this.#hide()
+    if (!(dom instanceof Element)) {//不是DOM对象
+      this.#hide() //隐藏
       return
     }
 
     const filterNodes = this.#filterNodes
     if (!filterNodes) return
-
+    // 找到该位置上符合条件的DOM节点
     const result = selectRootNodeByDom(
       view,
       { x, y: event.clientY },

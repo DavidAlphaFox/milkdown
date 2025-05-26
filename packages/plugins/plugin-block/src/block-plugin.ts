@@ -30,7 +30,7 @@ export const blockSpec = $ctx<PluginSpec<any>, 'blockSpec'>({}, 'blockSpec')
 withMeta(blockSpec, {
   displayName: 'Ctx<blockSpec>',
 })
-
+// 创建一个Block相关的Plugin
 /// The block prosemirror plugin.
 export const blockPlugin = $prose((ctx) => {
   const milkdownPluginBlockKey = new PluginKey('MILKDOWN_BLOCK')

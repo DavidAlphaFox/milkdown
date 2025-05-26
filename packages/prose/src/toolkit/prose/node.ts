@@ -37,15 +37,16 @@ export function findChildrenByMark(
     descend
   )
 }
-
+//查找对应的父亲节点
 export function findParent(predicate: Predicate) {
   return ($pos: ResolvedPos): NodeWithFromTo | undefined => {
+    // 深度大于0就逐层向上遍历
     for (let depth = $pos.depth; depth > 0; depth -= 1) {
-      const node = $pos.node(depth)
+      const node = $pos.node(depth) //得到祖先节点
 
-      if (predicate(node)) {
-        const from = $pos.before(depth)
-        const to = $pos.after(depth)
+      if (predicate(node)) { //如果是自己想要的节点
+        const from = $pos.before(depth) //指定深度下节点前面
+        const to = $pos.after(depth) //指定深度下节点后面
         return {
           from,
           to,

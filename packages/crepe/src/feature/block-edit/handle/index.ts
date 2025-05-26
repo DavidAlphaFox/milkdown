@@ -22,14 +22,14 @@ export class BlockHandleView implements PluginView {
 
   constructor(ctx: Ctx, config?: BlockEditFeatureConfig) {
     this.#ctx = ctx
-    const content = document.createElement('div')
-    content.classList.add('milkdown-block-handle')
+    const content = document.createElement('div') //创建一个空的div
+    content.classList.add('milkdown-block-handle') // 在这个div上加上handle的css
     const app = createApp(BlockHandle, {
       onAdd: this.onAdd,
       addIcon: config?.handleAddIcon ?? (() => plusIcon),
       handleIcon: config?.handleDragIcon ?? (() => menuIcon),
     })
-    app.mount(content)
+    app.mount(content) //将VUE的节点挂载到这个content节点上
     this.#app = app
     this.#content = content
     this.#provider = new BlockProvider({

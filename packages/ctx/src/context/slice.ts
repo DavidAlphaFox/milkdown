@@ -74,9 +74,9 @@ export class Slice<T = any, N extends string = string> {
 /// Slice type can be used to create slices in different containers.
 export class SliceType<T = any, N extends string = string> {
   /// The unique id of the slice type.
-  readonly id: symbol
+  readonly id: symbol //每个Slice独有的类型
   /// The name of the slice type.
-  readonly name: N
+  readonly name: N //该Slice的名称
   /// @internal
   readonly _typeInfo: () => T
   /// @internal
@@ -85,7 +85,7 @@ export class SliceType<T = any, N extends string = string> {
   /// Create a slice type with a default value and a name.
   /// The name should be unique in the container.
   constructor(value: T, name: N) {
-    this.id = Symbol(`Context-${name}`)
+    this.id = Symbol(`Context-${name}`) //在名称前加Context的前缀
     this.name = name
     this._defaultValue = value
     this._typeInfo = (): T => {
@@ -105,4 +105,4 @@ export class SliceType<T = any, N extends string = string> {
 export const createSlice = <T = any, N extends string = string>(
   value: T,
   name: N
-) => new SliceType(value, name)
+) => new SliceType(value, name) //创建切片，每个切片有类型形名城和值

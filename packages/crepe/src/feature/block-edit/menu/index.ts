@@ -35,7 +35,7 @@ export function configureMenu(ctx: Ctx, config?: BlockEditFeatureConfig) {
     view: (view) => new MenuView(ctx, view, config),
   })
 }
-
+//菜单插件的视图
 class MenuView implements PluginView {
   readonly #content: HTMLElement
   readonly #app: App
